@@ -1,0 +1,390 @@
+/* ============================================================
+   admin.css — Partie administration (Dossier des clients, etc.)
+   Réutilise les variables de couleur définies dans style.css
+   ============================================================ */
+
+.admin-shell{
+  display:flex;
+  min-height:100vh;
+  background:var(--blanc-casse);
+}
+
+/* ---------- Sidebar ---------- */
+.admin-sidebar{
+  width:260px;
+  flex-shrink:0;
+  background:linear-gradient(180deg, var(--bleu-nuit) 0%, var(--bleu-nuit-2) 100%);
+  color:#fff;
+  padding:1.4rem 1.1rem;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+  transition:width .25s ease, padding .25s ease, opacity .2s ease;
+}
+
+/* Sidebar repliée (bouton icône dans la barre du haut / bouton X dans le menu) */
+.admin-sidebar.collapsed{
+  width:0;
+  padding-left:0;
+  padding-right:0;
+  opacity:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.admin-brand{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.5rem;
+  padding:.4rem .3rem 1.3rem;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  margin-bottom:1.2rem;
+  animation:brandFadeIn .6s ease both;
+}
+.admin-sidebar-close{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:30px; height:30px; flex-shrink:0;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-size:.8rem;
+  cursor:pointer;
+  transition:background .15s ease, transform .15s ease;
+}
+.admin-sidebar-close:hover{ background:rgba(255,255,255,.2); transform:scale(1.06); }
+.admin-brand .logo-wrap{
+  position:relative;
+  flex-shrink:0;
+  width:48px;
+  height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.admin-brand .logo-wrap::before{
+  content:'';
+  position:absolute;
+  inset:-4px;
+  border-radius:50%;
+  background:conic-gradient(from 0deg, var(--or-fonce), var(--or-clair), var(--or), var(--or-fonce));
+  opacity:.55;
+  filter:blur(2px);
+  animation:brandRingSpin 6s linear infinite;
+}
+.admin-brand img{
+  position:relative;
+  height:44px; width:44px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#0b1b3a;
+  border:2px solid rgba(255,255,255,.85);
+  box-shadow:0 0 0 3px rgba(212,175,55,.18), 0 4px 14px rgba(0,0,0,.35);
+  transition:transform .35s ease, box-shadow .35s ease;
+  animation:brandLogoPulse 3.2s ease-in-out infinite;
+}
+.admin-brand:hover img{
+  transform:scale(1.08) rotate(-4deg);
+  box-shadow:0 0 0 4px rgba(212,175,55,.32), 0 6px 18px rgba(0,0,0,.4);
+}
+.admin-brand .txt{font-family:var(--font-display); font-weight:700; font-size:.92rem; line-height:1.2; letter-spacing:.02em;}
+.admin-brand .txt small{
+  display:block; font-weight:600; font-size:.62rem; letter-spacing:.1em;
+  color:var(--or-clair); text-transform:uppercase;
+  background:linear-gradient(90deg, var(--or-fonce), var(--or-clair), var(--or), var(--or-fonce));
+  background-size:200% auto;
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  animation:brandShimmer 4s linear infinite;
+}
+
+@keyframes brandFadeIn{
+  from{ opacity:0; transform:translateY(-8px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+@keyframes brandRingSpin{
+  to{ transform:rotate(360deg); }
+}
+@keyframes brandLogoPulse{
+  0%, 100%{ box-shadow:0 0 0 3px rgba(212,175,55,.18), 0 4px 14px rgba(0,0,0,.35); }
+  50%{ box-shadow:0 0 0 6px rgba(212,175,55,.32), 0 4px 18px rgba(0,0,0,.4); }
+}
+@keyframes brandShimmer{
+  to{ background-position:200% center; }
+}
+@media (prefers-reduced-motion: reduce){
+  .admin-brand, .admin-brand img, .admin-brand .logo-wrap::before, .admin-brand .txt small{
+    animation:none !important;
+  }
+}
+
+.admin-nav{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.25rem;}
+.admin-nav a{
+  display:flex; align-items:center; gap:.65rem;
+  padding:.65rem .8rem;
+  border-radius:var(--radius-md);
+  color:rgba(255,255,255,.75);
+  font-size:.85rem;
+  font-weight:600;
+  transition:background .15s, color .15s;
+}
+.admin-nav a i{font-size:1.05rem; width:1.2rem; text-align:center;}
+.admin-nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+.admin-nav a.active{background:var(--or); color:var(--bleu-nuit);}
+
+.admin-nav-divider{
+  margin:1rem .3rem .5rem;
+  font-size:.65rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+}
+
+.admin-back-site{
+  margin-top:1.5rem;
+  padding-top:1rem;
+  border-top:1px solid rgba(255,255,255,.12);
+}
+
+/* ---------- Zone de contenu ---------- */
+.admin-main{flex:1; min-width:0;}
+.admin-topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 1.6rem;
+  background:#fff;
+  border-bottom:2px solid var(--or);
+  position:sticky; top:0; z-index:5;
+  box-shadow:0 2px 8px rgba(0, 61, 122, 0.08);
+}
+.admin-topbar h1{
+  font-size:1.15rem; margin:0; color:var(--bleu-nuit); font-weight:700;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.admin-topbar .admin-user{display:flex; align-items:center; gap:.6rem; font-size:.85rem; color:var(--bleu-nuit); flex-shrink:0; white-space:nowrap;}
+.admin-topbar .admin-user .avatar{
+  width:34px; height:34px; border-radius:50%;
+  background:var(--or); color:var(--bleu-nuit);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-family:var(--font-display);
+  overflow:hidden;
+  border:2px solid rgba(11,27,58,.15);
+}
+.admin-topbar .admin-user .avatar img{
+  width:100%; height:100%;
+  object-fit:cover;
+}
+.admin-topbar .theme-toggle-btn{
+  border-color:rgba(11,27,58,.2);
+  background:rgba(11,27,58,.05);
+  color:var(--bleu-nuit);
+}
+.admin-topbar .theme-toggle-btn:hover{ background:rgba(11,27,58,.1); }
+.admin-topbar #adminSidebarToggle{ color:var(--bleu-nuit); }
+
+.admin-clock{
+  display:flex; align-items:center; gap:.5rem;
+  font-family:var(--font-mono);
+  font-size:.8rem;
+  color:var(--gris-texte);
+  padding:.35rem .8rem;
+  border-radius:999px;
+  background:rgba(11,27,58,.05);
+  border:1px solid rgba(11,27,58,.1);
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.admin-clock i{ color:var(--or-fonce); font-size:.85rem; }
+.admin-clock-time{ font-weight:700; color:var(--bleu-nuit); letter-spacing:.03em; }
+
+.admin-content{padding:1.6rem;}
+
+/* ---------- Cartes de statistiques ---------- */
+.admin-stat-card{
+  background:#fff;
+  border:1px solid var(--ligne-claire);
+  border-radius:var(--radius-md);
+  padding:1.2rem 1.3rem;
+  height:100%;
+}
+.admin-stat-card .stat-label{font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--gris-texte); margin-bottom:.4rem;}
+.admin-stat-card .stat-value{font-family:var(--font-mono); font-size:1.6rem; font-weight:700; color:var(--bleu-nuit);}
+.admin-stat-card .stat-icon{
+  width:42px; height:42px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(212,175,55,.12); color:var(--or-fonce); font-size:1.2rem;
+  margin-bottom:.7rem;
+}
+
+/* ---------- Tableaux admin ---------- */
+.admin-card{
+  background:#fff;
+  border:1px solid var(--ligne-claire);
+  border-radius:var(--radius-md);
+  overflow:hidden;
+}
+.admin-card-header{
+  padding:1rem 1.2rem;
+  border-bottom:1px solid var(--ligne-claire);
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+}
+.admin-card-header h2{font-size:1rem; margin:0; font-family:var(--font-display);}
+
+.admin-table{width:100%; border-collapse:collapse; font-size:.85rem;}
+.admin-table th{
+  text-align:left; padding:.7rem 1.2rem;
+  background:var(--blanc-casse);
+  color:var(--gris-texte);
+  font-size:.7rem; text-transform:uppercase; letter-spacing:.06em;
+  border-bottom:1px solid var(--ligne-claire);
+}
+.admin-table td{padding:.7rem 1.2rem; border-bottom:1px solid var(--ligne-claire); vertical-align:middle;}
+.admin-table tr:last-child td{border-bottom:none;}
+.admin-table tr:hover td{background:rgba(212,175,55,.05);}
+.admin-table .mono{font-family:var(--font-mono);}
+
+.admin-search{
+  display:flex; gap:.5rem; align-items:center;
+}
+.admin-search input{
+  border:1px solid var(--ligne-claire);
+  border-radius:var(--radius-md);
+  padding:.5rem .9rem;
+  font-size:.85rem;
+  min-width:220px;
+}
+
+.badge-admin{
+  display:inline-block; padding:.2rem .55rem; border-radius:20px;
+  font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em;
+}
+.badge-in{background:rgba(38,166,91,.12); color:#1c8a4b;}
+.badge-out{background:rgba(206,17,38,.1); color:var(--rouge-haiti);}
+
+.admin-empty{padding:2.5rem 1rem; text-align:center; color:var(--gris-texte);}
+
+/* ---------- Boutons d'action (remplace les styles inline dupliqués) ----------
+   .admin-actions : conteneur pour les boutons d'une cellule de tableau
+   (Modifier / Masquer / Supprimer, etc.) — aligné à droite, passe à la
+   ligne proprement sur petit écran. Les <form> à l'intérieur sont rendus
+   "display:contents" pour que leur bouton se comporte comme un élément
+   flex à part entière (plus besoin de style="display:inline" partout). */
+.admin-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:.5rem;
+}
+.admin-actions form{display:contents;}
+
+/* Bouton d'action compact (tableaux) : taille et espacement uniformes,
+   remplace style="padding:.35rem .8rem;font-size:.75rem;" répété partout. */
+.btn-admin-sm{
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  padding:.4rem .85rem;
+  font-size:.75rem;
+  line-height:1.3;
+  white-space:nowrap;
+}
+.btn-admin-sm.danger{color:var(--rouge-haiti); border-color:var(--rouge-haiti);}
+.btn-admin-sm.danger:hover{background:rgba(206,17,38,.08); color:var(--rouge-haiti); border-color:var(--rouge-haiti);}
+
+/* Bouton d'action principal dans un en-tête de carte (ex : "Nouveau billet"),
+   taille uniforme pour tous les dossiers admin. */
+.btn-admin-header{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  padding:.55rem 1.1rem;
+  font-size:.8rem;
+  white-space:nowrap;
+}
+
+/* Bouton icône de recherche accolé au champ .admin-search, hauteur alignée
+   avec l'input pour éviter tout décalage vertical. */
+.btn-search-admin{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:.5rem .9rem;
+  font-size:.8rem;
+  flex-shrink:0;
+}
+
+/* Paire de boutons d'un formulaire (Enregistrer / Annuler) : espacement
+   et hauteur cohérents, le bouton secondaire ne s'étire pas. */
+.admin-form-actions{display:flex; gap:.6rem; align-items:stretch; margin-top:.5rem; flex-wrap:wrap;}
+.admin-form-actions .mini-btn{flex:1 1 auto;}
+.admin-form-actions .mini-btn-outline{flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;}
+
+/* ---------- Accès rapide (tableau de bord) ---------- */
+.admin-quick-links{display:flex; flex-wrap:wrap; gap:.6rem;}
+.admin-quick-links a{white-space:nowrap;}
+
+/* ---------- Rideau (mobile) : assombrit le contenu quand le menu est ouvert ---------- */
+.admin-sidebar-backdrop{
+  display:none;
+  position:fixed; inset:0;
+  background:rgba(10,14,26,.55);
+  z-index:45;
+}
+.admin-sidebar-backdrop.open{display:block;}
+
+/* Vignette d'aperçu d'un billet dans le dossier de gestion des billets */
+.billet-swatch{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:52px; height:34px; border-radius:8px;
+  background:linear-gradient(135deg, var(--bill-c1), var(--bill-c2));
+  color:#fff; font-family:var(--font-mono); font-size:.72rem; font-weight:700;
+  box-shadow:0 3px 8px rgba(0,0,0,.25);
+  overflow:hidden;
+}
+.billet-swatch.billet-swatch-img{background:var(--fond-carte, #eee);}
+.billet-swatch img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+
+@media (max-width: 900px){
+  .admin-sidebar{position:fixed; left:-280px; top:0; z-index:50; transition:left .2s; box-shadow:0 0 40px rgba(0,0,0,.3);}
+  .admin-sidebar.open{left:0;}
+  .admin-content{padding:1rem;}
+  .admin-topbar{padding:.85rem 1rem;}
+  .admin-topbar h1{font-size:1rem;}
+}
+
+@media (max-width: 576px){
+  .admin-content{padding:.75rem;}
+  .admin-topbar{padding:.7rem .85rem;}
+  .admin-card-header{padding:.85rem 1rem;}
+  .admin-card-header h2{font-size:.9rem;}
+  .admin-search{width:100%;}
+  .admin-search input{min-width:0; flex:1;}
+  .admin-table th, .admin-table td{padding:.6rem .8rem; font-size:.78rem;}
+  .admin-stat-card{padding:1rem;}
+  .admin-stat-card .stat-value{font-size:1.3rem;}
+  .admin-topbar .admin-user span:last-child{display:none;}
+  .admin-clock{padding:.3rem .6rem; font-size:.72rem; gap:.35rem;}
+  .admin-clock #adminClockDate{display:none;}
+  .admin-actions{justify-content:flex-start; width:100%;}
+  .btn-admin-sm{flex:1 1 auto; justify-content:center;}
+}
+
+/* Correctif : .btn-outline-line est conçu à l'origine pour l'en-tête du site
+   public (fond bleu nuit, texte blanc). Sur les fonds clairs de l'espace
+   admin (tableaux, cartes), ce texte blanc était invisible — d'où les
+   boutons "Modifier" / "Masquer" qui semblaient avoir disparu. On force ici
+   des couleurs lisibles sur fond clair, sans toucher au style original. */
+.admin-content .btn-outline-line,
+.admin-card .btn-outline-line{
+  color:var(--bleu-nuit);
+  border-color:rgba(15,23,42,.25);
+}
+.admin-content .btn-outline-line:hover,
+.admin-card .btn-outline-line:hover{
+  color:var(--or-fonce);
+  border-color:var(--or);
+  background:rgba(212,175,55,.08);
+}

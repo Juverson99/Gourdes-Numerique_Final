@@ -1,0 +1,183 @@
+/* ============================================================
+   site-dark-mode.css — Mode nocturne du site client
+   ------------------------------------------------------------
+   S'active en ajoutant l'attribut data-theme="dark" sur <html>
+   (bouton bascule dans la barre de navigation, voir header.php /
+   app.js). Le mode clair reste le comportement par défaut si
+   l'attribut est absent — ce fichier ne fait qu'ajouter des
+   surcharges, jamais de style de base.
+
+   Le bandeau (header) et le pied de page (footer) sont déjà en
+   bleu nuit dans les deux modes : ils ne nécessitent aucune
+   surcharge. Ce fichier cible donc le corps des pages (fond
+   blanc, cartes, formulaires) qui doit basculer en sombre.
+   ============================================================ */
+
+[data-theme="dark"]{
+  --bg-page:#0b1626;
+  --blanc-casse:#0e1c30;
+  --gris-texte:#93a4c3;
+  --ligne-claire:rgba(255,255,255,.09);
+}
+
+[data-theme="dark"] body{
+  background:var(--bg-page);
+  color:#e7ecf5;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] .font-display{
+  color:#eef2f8;
+}
+
+[data-theme="dark"] ::selection{ color:#0b1626; }
+
+/* ---------- Cartes et surfaces blanches génériques ---------- */
+[data-theme="dark"] .quick-card,
+[data-theme="dark"] .send-summary,
+[data-theme="dark"] .info-card,
+[data-theme="dark"] .qr-box,
+[data-theme="dark"] .feature-detail-card,
+[data-theme="dark"] .contact-info-card,
+[data-theme="dark"] .contact-form-card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .merchant-chip,
+[data-theme="dark"] .filter-chip,
+[data-theme="dark"] .agences-empty,
+[data-theme="dark"] .map-container,
+[data-theme="dark"] .directions-panel{
+  background:#10203a;
+  border-color:rgba(255,255,255,.08);
+}
+
+[data-theme="dark"] .quick-card:hover,
+[data-theme="dark"] .feature-detail-card:hover,
+[data-theme="dark"] .stat-card:hover{
+  box-shadow:0 14px 30px rgba(0,0,0,.35);
+}
+
+[data-theme="dark"] .quick-card h3,
+[data-theme="dark"] .feature-detail-card h3,
+[data-theme="dark"] .feature-detail-card ul li,
+[data-theme="dark"] .value-prop-row h4,
+[data-theme="dark"] .contact-info-item h5,
+[data-theme="dark"] .hero h1,
+[data-theme="dark"] .total-amount small,
+[data-theme="dark"] .stat-value,
+[data-theme="dark"] .journal-action,
+[data-theme="dark"] .journal-entry-notes,
+[data-theme="dark"] .mini-btn-outline,
+[data-theme="dark"] .directions-title,
+[data-theme="dark"] .directions-summary,
+[data-theme="dark"] .directions-step-text{
+  color:#eef2f8;
+}
+
+/* ---------- Formulaires (auth, mini, filtres) ---------- */
+[data-theme="dark"] .form-control-auth,
+[data-theme="dark"] .form-control-mini,
+[data-theme="dark"] .filter-input,
+[data-theme="dark"] .filter-select,
+[data-theme="dark"] .account-id,
+[data-theme="dark"] .phone-input-wrap,
+[data-theme="dark"] .directions-search input{
+  background:#0e1c30;
+  border-color:rgba(255,255,255,.14);
+  color:#e7ecf5;
+}
+[data-theme="dark"] .form-control-mini:focus{
+  background:#132540;
+}
+[data-theme="dark"] .phone-input-wrap:focus-within{
+  background:#132540;
+}
+[data-theme="dark"] .phone-input-wrap .form-control-mini,
+[data-theme="dark"] .phone-input-wrap .form-control-mini:focus{
+  background:transparent;
+}
+[data-theme="dark"] .phone-input-prefix{
+  color:#7b8bab;
+  border-right-color:rgba(255,255,255,.14);
+}
+[data-theme="dark"] .form-control-auth::placeholder,
+[data-theme="dark"] .form-control-mini::placeholder,
+[data-theme="dark"] .filter-input::placeholder{
+  color:#7b8bab;
+}
+
+/* ---------- Modale de connexion / inscription (Bootstrap) ---------- */
+[data-theme="dark"] .modal-content{
+  background:#10203a;
+  color:#e7ecf5;
+}
+[data-theme="dark"] .auth-modal .modal-title{ color:#eef2f8; }
+[data-theme="dark"] .btn-close{ filter:invert(1) brightness(1.8); }
+
+/* ---------- Menu déroulant du compte (Bootstrap) ---------- */
+[data-theme="dark"] .dropdown-menu{
+  background:#10203a;
+  border-color:rgba(255,255,255,.1);
+}
+[data-theme="dark"] .dropdown-item{ color:#dde4f0; }
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus{
+  background:rgba(212,175,55,.12);
+  color:#eef2f8;
+}
+[data-theme="dark"] .dropdown-divider{ border-color:rgba(255,255,255,.1); }
+
+/* ---------- Journal / filtres, historique ---------- */
+[data-theme="dark"] .journal-filters,
+[data-theme="dark"] .journal-stats{
+  background:rgba(255,255,255,.04);
+}
+[data-theme="dark"] .history-row,
+[data-theme="dark"] .goal-row{
+  border-color:rgba(255,255,255,.09);
+}
+
+/* ---------- Petits éléments (flèches, points du carrousel) ---------- */
+[data-theme="dark"] .showcase-arrow{
+  background:rgba(255,255,255,.08);
+  color:#eef2f8;
+}
+[data-theme="dark"] .showcase-dot{
+  background:rgba(255,255,255,.18);
+}
+
+/* ---------- Carte des agences BNC (Leaflet) ---------- */
+[data-theme="dark"] .directions-search,
+[data-theme="dark"] .suggestions-box{
+  background:#10203a;
+  box-shadow:0 5px 20px rgba(0,0,0,.4);
+}
+[data-theme="dark"] .suggestion-item{
+  border-color:rgba(255,255,255,.08);
+  color:#dde4f0;
+}
+[data-theme="dark"] .suggestion-item:hover,
+[data-theme="dark"] .icon-btn-round{
+  background:rgba(255,255,255,.08);
+  color:#eef2f8;
+}
+[data-theme="dark"] .icon-btn-round:hover{
+  background:var(--or);
+  color:#0b1626;
+}
+[data-theme="dark"] .directions-summary{
+  background:rgba(255,255,255,.06);
+}
+[data-theme="dark"] .directions-header,
+[data-theme="dark"] .directions-step{
+  border-color:rgba(255,255,255,.09);
+}
+[data-theme="dark"] .directions-step-distance{ color:#93a4c3; }
+
+/* ---------- Bouton bascule mode clair / nocturne ---------- */
+[data-theme="dark"] .btn-fullscreen-toggle{
+  border-color:rgba(255,255,255,.25);
+  background:rgba(255,255,255,.06);
+}

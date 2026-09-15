@@ -1,0 +1,293 @@
+/**
+ * admin-brh-theme.css
+ * Thème officiel BRH pour l'interface d'administration
+ * Couleur: Bleu Marine Officiel (#003d7a)
+ */
+
+/* ==================== BARRE SUPÉRIEURE (Topbar) ==================== */
+
+/* Amélioration du style du bouton toggle sur mobile */
+.admin-topbar .btn {
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.admin-topbar .btn:hover,
+.admin-topbar .btn:focus {
+  color: var(--or-clair);
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+/* ==================== SIDEBAR ==================== */
+
+/* Ajouter un bandeau officiel en haut de la sidebar */
+.admin-brand {
+  border-bottom: 2px solid var(--or);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-brand::before {
+  content: '';
+  display: block;
+  width: calc(100% + 1.6rem);
+  height: 3px;
+  background: linear-gradient(90deg, var(--or-fonce), var(--or), var(--or-clair), var(--or), var(--or-fonce));
+  background-size: 200% auto;
+  position: relative;
+  left: -0.8rem;
+  top: -1rem;
+  margin-bottom: 1rem;
+  border-radius: 2px;
+  animation: brhBarShimmer 3s linear infinite;
+}
+
+@keyframes brhBarShimmer {
+  to { background-position: 200% center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-brand::before { animation: none; }
+}
+
+/* Amélioration des liens de navigation */
+.admin-nav a {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.admin-nav a:hover {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--or-clair);
+}
+
+.admin-nav a.active {
+  background: var(--or);
+  color: var(--bleu-nuit);
+  font-weight: 600;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Divider dans la navigation */
+.admin-nav-divider {
+  color: var(--or-clair);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 1.2rem;
+  margin-bottom: 0.6rem;
+  padding-left: 0.8rem;
+}
+
+/* ==================== SECTION BAS DE SIDEBAR ==================== */
+
+.admin-back-site {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-back-site .admin-nav a {
+  font-size: 0.9rem;
+}
+
+/* ==================== CONTENU PRINCIPAL ==================== */
+
+.admin-content {
+  background: #fafbfc;
+}
+
+/* ==================== CARTES ET ÉLÉMENTS ==================== */
+
+.admin-card {
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 61, 122, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.admin-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 61, 122, 0.12);
+}
+
+.admin-card-header {
+  background: linear-gradient(135deg, rgba(0, 61, 122, 0.05), rgba(0, 82, 163, 0.03));
+  border-bottom: 1px solid rgba(0, 61, 122, 0.1);
+  border-radius: 10px 10px 0 0;
+}
+
+.admin-card-header h2 {
+  color: var(--bleu-nuit);
+  font-weight: 700;
+}
+
+/* ==================== BOUTONS ==================== */
+
+.mini-btn {
+  background: var(--bleu-nuit);
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.mini-btn:hover {
+  background: #004488;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 61, 122, 0.2);
+}
+
+.mini-btn i {
+  margin-right: 0.4rem;
+}
+
+.mini-btn-outline {
+  border: 2px solid var(--bleu-nuit);
+  color: var(--bleu-nuit);
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.mini-btn-outline:hover {
+  background: var(--bleu-nuit);
+  color: #fff;
+}
+
+/* ==================== BADGES ==================== */
+
+.badge-admin {
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+}
+
+.badge-in {
+  background: rgba(38, 166, 91, 0.15);
+  color: #1c8a4b;
+}
+
+.badge-out {
+  background: rgba(206, 17, 38, 0.12);
+  color: var(--rouge-haiti);
+}
+
+/* ==================== TABLEAU ==================== */
+
+.admin-table {
+  border-collapse: collapse;
+}
+
+.admin-table thead {
+  background: linear-gradient(135deg, rgba(0, 61, 122, 0.08), rgba(0, 82, 163, 0.05));
+  border-bottom: 2px solid rgba(0, 61, 122, 0.15);
+}
+
+.admin-table th {
+  color: var(--bleu-nuit);
+  font-weight: 700;
+  padding: 1rem 0.8rem;
+  text-align: left;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+.admin-table td {
+  padding: 0.9rem 0.8rem;
+  border-bottom: 1px solid rgba(0, 61, 122, 0.05);
+}
+
+.admin-table tr:hover td {
+  background: rgba(0, 61, 122, 0.04);
+}
+
+/* ==================== FORMULAIRES ==================== */
+
+.form-control-auth,
+.form-check-input {
+  border-color: rgba(0, 61, 122, 0.2);
+  transition: all 0.3s ease;
+}
+
+.form-control-auth:focus {
+  border-color: var(--bleu-nuit);
+  box-shadow: 0 0 0 3px rgba(0, 61, 122, 0.1);
+}
+
+.form-check-input:checked {
+  background-color: var(--bleu-nuit);
+  border-color: var(--bleu-nuit);
+}
+
+/* ==================== ALERTES ==================== */
+
+.alert {
+  border-radius: 8px;
+  border-left: 4px solid var(--or);
+}
+
+.alert-success {
+  background: rgba(38, 166, 91, 0.1);
+  color: #1c8a4b;
+  border-color: #1c8a4b;
+}
+
+.alert-danger {
+  background: rgba(206, 17, 38, 0.1);
+  color: var(--rouge-haiti);
+  border-color: var(--rouge-haiti);
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 768px) {
+  .admin-topbar .btn:focus {
+    outline: 2px solid var(--or-clair);
+    outline-offset: 2px;
+  }
+  
+  .admin-card-header {
+    padding: 1rem 1rem;
+  }
+  
+  .admin-table {
+    font-size: 0.9rem;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    padding: 0.7rem 0.5rem;
+  }
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+@keyframes slideInSidebar {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.admin-sidebar.open {
+  animation: slideInSidebar 0.3s ease-out;
+}
+
+/* ==================== IMPRIMER ==================== */
+
+@media print {
+  .admin-topbar,
+  .admin-sidebar,
+  .admin-back-site {
+    display: none;
+  }
+  
+  .admin-main {
+    width: 100%;
+  }
+}

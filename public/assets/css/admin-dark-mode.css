@@ -1,0 +1,156 @@
+/* ============================================================
+   admin-dark-mode.css — Mode nocturne de l'administration
+   ------------------------------------------------------------
+   S'active en ajoutant l'attribut data-theme="dark" sur <html>
+   (bouton bascule dans le topbar, voir admin_header.php /
+   admin_footer.php). Le mode clair reste le comportement par
+   défaut si l'attribut est absent — ce fichier ne fait
+   qu'ajouter des surcharges, jamais de style de base.
+   ============================================================ */
+
+[data-theme="dark"]{
+  --bg-page:#0b1626;
+  --blanc-casse:#0e1c30;
+  --gris-texte:#93a4c3;
+  --ligne-claire:rgba(255,255,255,.09);
+}
+
+[data-theme="dark"] body{
+  background:var(--bg-page);
+  color:#e7ecf5;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] .font-display{
+  color:#eef2f8;
+}
+
+/* ---------- Coquille / sidebar / topbar ---------- */
+[data-theme="dark"] .admin-shell{ background:var(--blanc-casse); }
+
+[data-theme="dark"] .admin-sidebar{
+  background:linear-gradient(180deg, #061024 0%, #0a1830 100%);
+}
+
+[data-theme="dark"] .admin-topbar{
+  background:linear-gradient(90deg, #061024 0%, #0c1e3d 100%);
+}
+[data-theme="dark"] .admin-topbar h1{ color:#fff; }
+[data-theme="dark"] .admin-topbar .admin-user{ color:#fff; }
+[data-theme="dark"] .admin-topbar .admin-user .avatar{ border-color:rgba(255,255,255,.3); }
+[data-theme="dark"] .admin-topbar #adminSidebarToggle{ color:#fff; }
+[data-theme="dark"] .admin-topbar .theme-toggle-btn{
+  border-color:rgba(255,255,255,.3);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+}
+[data-theme="dark"] .admin-topbar .theme-toggle-btn:hover{ background:rgba(255,255,255,.18); }
+[data-theme="dark"] .admin-clock{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.2);
+  color:rgba(255,255,255,.7);
+}
+[data-theme="dark"] .admin-clock-time{ color:#fff; }
+
+[data-theme="dark"] .admin-sidebar-backdrop{ background:rgba(0,0,0,.65); }
+
+/* ---------- Cartes / statistiques ---------- */
+[data-theme="dark"] .admin-card,
+[data-theme="dark"] .admin-stat-card{
+  background:#10203a;
+  border-color:rgba(255,255,255,.08);
+}
+[data-theme="dark"] .admin-card-header{ border-color:rgba(255,255,255,.08); }
+[data-theme="dark"] .admin-stat-card .stat-value{ color:#eef2f8; }
+
+/* ---------- Tableaux ---------- */
+[data-theme="dark"] .admin-table th{
+  background:#0c1930;
+  color:#8fa1c2;
+  border-color:rgba(255,255,255,.08);
+}
+[data-theme="dark"] .admin-table td{
+  border-color:rgba(255,255,255,.08);
+  color:#dde4f0;
+}
+[data-theme="dark"] .admin-table tr:hover td{ background:rgba(212,175,55,.09); }
+[data-theme="dark"] .admin-empty{ color:#8296bb; }
+
+/* ---------- Formulaires ---------- */
+[data-theme="dark"] .form-control-auth,
+[data-theme="dark"] .admin-search input,
+[data-theme="dark"] select.form-control-auth,
+[data-theme="dark"] textarea.form-control-auth{
+  background:#0c1930;
+  border-color:rgba(255,255,255,.16);
+  color:#e7ecf5;
+}
+[data-theme="dark"] .form-control-auth::placeholder{ color:#6d7fa0; }
+[data-theme="dark"] .form-control-auth:focus{
+  border-color:var(--or);
+  box-shadow:0 0 0 3px rgba(212,175,55,.18);
+}
+[data-theme="dark"] .form-check-input{
+  background-color:#0c1930;
+  border-color:rgba(255,255,255,.25);
+}
+[data-theme="dark"] .form-label-mini,
+[data-theme="dark"] .form-check-label{ color:#c3cee2; }
+
+/* ---------- Boutons ---------- */
+[data-theme="dark"] .mini-btn-outline{
+  border-color:rgba(255,255,255,.22);
+  color:#e7ecf5;
+}
+[data-theme="dark"] .mini-btn-outline:hover{ border-color:var(--or); color:var(--or); }
+
+[data-theme="dark"] .admin-content .btn-outline-line,
+[data-theme="dark"] .admin-card .btn-outline-line{
+  color:#dde4f0;
+  border-color:rgba(255,255,255,.22);
+}
+[data-theme="dark"] .admin-content .btn-outline-line:hover,
+[data-theme="dark"] .admin-card .btn-outline-line:hover{
+  color:var(--or);
+  border-color:var(--or);
+  background:rgba(212,175,55,.1);
+}
+[data-theme="dark"] .btn-admin-sm.danger{ color:#ff8391; border-color:#ff8391; }
+[data-theme="dark"] .btn-admin-sm.danger:hover{ background:rgba(206,17,38,.14); }
+
+/* ---------- Badges / alertes ---------- */
+[data-theme="dark"] .badge-in{ background:rgba(38,166,91,.2); color:#5fd393; }
+[data-theme="dark"] .badge-out{ background:rgba(206,17,38,.2); color:#ff8391; }
+
+[data-theme="dark"] .alert-success{
+  background:rgba(38,166,91,.16);
+  color:#5fd393;
+  border-color:rgba(38,166,91,.35);
+}
+[data-theme="dark"] .alert-danger{
+  background:rgba(206,17,38,.16);
+  color:#ff8391;
+  border-color:rgba(206,17,38,.35);
+}
+
+/* ---------- Divers ---------- */
+[data-theme="dark"] .billet-swatch.billet-swatch-img{ background:#0c1930; }
+[data-theme="dark"] .table-avatar{ box-shadow:0 0 0 2px rgba(255,255,255,.08); }
+
+/* ---------- Bouton bascule mode clair / nocturne ---------- */
+.theme-toggle-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-size:1rem;
+  cursor:pointer;
+  transition:background .15s ease, transform .15s ease;
+}
+.theme-toggle-btn:hover{ background:rgba(255,255,255,.18); transform:translateY(-1px); }
+.theme-toggle-btn i{ pointer-events:none; }
